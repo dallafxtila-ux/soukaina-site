@@ -1,0 +1,167 @@
+# Back office de Soukaina — https://app.pagescms.org
+# 3 rubriques : Ateliers Tila Art Club · Œuvres DALLAF · Galerie photo DALLAF
+
+media:
+  - name: ateliers
+    label: Photos des ateliers (Tila)
+    input: images/ateliers
+    output: images/ateliers
+  - name: oeuvres
+    label: Photos des œuvres (DALLAF)
+    input: images/oeuvres
+    output: images/oeuvres
+  - name: galerie
+    label: Galerie photo (DALLAF)
+    input: images/galerie
+    output: images/galerie
+
+content:
+  # ───────────────────────── TILA ART CLUB ─────────────────────────
+  - name: ateliers
+    label: "🎨 Tila Art Club · Mes ateliers"
+    type: file
+    path: data/ateliers.json
+    format: json
+    list:
+      collapsible: true
+      collapsed: true
+      summary: "{date} · {titre} · {lieu}"
+    fields:
+      - name: titre
+        label: Titre de l'atelier
+        type: string
+        required: true
+        description: "Ex. : Son rapport au corps"
+      - name: theme
+        label: Petit titre au-dessus
+        type: string
+        default: "Atelier d'art"
+        description: "Laisse « Atelier d'art » si tu ne sais pas."
+      - name: date
+        label: Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+        description: "Tant que la date n'est pas passée, l'atelier est dans « Prochains ateliers ». Après, il passe tout seul dans « Ils ont eu lieu »."
+      - name: heure
+        label: Horaires
+        type: string
+        description: "Ex. : 14h30 – 17h00"
+      - name: lieu
+        label: Nom du café
+        type: string
+        description: "Ex. : Tomé Café. Écris-le toujours pareil pour qu'il n'apparaisse qu'une fois dans « Ils nous accueillent »."
+      - name: adresse
+        label: Adresse
+        type: string
+        description: "Ex. : 5 rue Romarin, Lyon 1er"
+      - name: lien_lieu
+        label: Site internet ou Instagram du café
+        type: string
+        description: "Ex. : https://tome-cafe.com. Le nom du café devient cliquable."
+      - name: image
+        label: Photo principale
+        type: image
+        options:
+          media: ateliers
+        description: "La photo de la vignette. Avant l'atelier : l'affiche ou une photo d'un ancien atelier. Après : la plus belle photo du jour."
+      - name: description
+        label: Texte de présentation
+        type: text
+        description: "Ce qu'on va faire, ce qui est fourni… Saute une ligne pour faire un nouveau paragraphe."
+      - name: prix
+        label: Prix
+        type: string
+        description: "Ex. : 45 €"
+      - name: places
+        label: Nombre de places
+        type: string
+        description: "Ex. : 10 places"
+      - name: lien_reservation
+        label: Lien de réservation / paiement
+        type: string
+        description: "Colle ici le lien Weezevent (ou SumUp, PayPal, HelloAsso…). Il doit commencer par https://. Sans lien, le bouton devient « Me renseigner »."
+      - name: complet
+        label: Atelier complet
+        type: boolean
+        description: "Coche quand il n'y a plus de place : le bouton devient « Complet »."
+      - name: debrief
+        label: "Après l'atelier : le débrief"
+        type: text
+        description: "Raconte comment ça s'est passé. Ça s'affiche sur la page récap de l'atelier."
+      - name: photos
+        label: "Après l'atelier : les photos"
+        type: image
+        options:
+          media: ateliers
+          multiple:
+            max: 40
+        description: "Ajoute toutes les photos du jour : elles forment la galerie de la page récap."
+
+  # ─────────────────────────── DALLAF ───────────────────────────
+  - name: oeuvres
+    label: "🖼️ DALLAF · Mes œuvres"
+    type: file
+    path: data/oeuvres.json
+    format: json
+    list:
+      collapsible: true
+      collapsed: true
+      summary: "{titre}"
+    fields:
+      - name: titre
+        label: Titre de l'œuvre
+        type: string
+        required: true
+      - name: image
+        label: Photo de l'œuvre
+        type: image
+        required: true
+        options:
+          media: oeuvres
+        description: "Une photo nette de la toile, de face, bien éclairée."
+      - name: technique
+        label: Technique
+        type: string
+        description: "Ex. : Acrylique sur toile, Huile sur toile…"
+      - name: dimensions
+        label: Dimensions
+        type: string
+        description: "Ex. : 60 × 80 cm"
+      - name: annee
+        label: Année
+        type: string
+        description: "Ex. : 2026"
+      - name: disponible
+        label: Disponible à la vente
+        type: boolean
+        default: true
+        description: "Décoche quand l'œuvre est vendue : elle affiche « Vendue » et propose une œuvre similaire."
+      - name: miniature
+        type: string
+        hidden: true
+
+  - name: photos
+    label: "📷 DALLAF · Galerie photo"
+    type: file
+    path: data/photos.json
+    format: json
+    list:
+      collapsible: true
+      collapsed: true
+      summary: "{legende}"
+    fields:
+      - name: image
+        label: Photo
+        type: image
+        required: true
+        options:
+          media: galerie
+      - name: legende
+        label: Légende (facultatif)
+        type: string
+        description: "Ex. : Vernissage au Grand Hôtel-Dieu, mars 2026"
+      - name: miniature
+        type: string
+        hidden: true
