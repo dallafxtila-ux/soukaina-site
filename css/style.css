@@ -664,3 +664,7 @@ section[id] { scroll-margin-top: calc(var(--bar-h) + 80px); }
   .benefits h3 { font-size: 21px; }
   .benefits p { font-size: 15px; }
 }
+
+/* DALLAF : titre et intro centrés */
+.g-hero { text-align: center; }
+.g-hero p { margin-left: auto; margin-right: auto; }
