@@ -22,10 +22,7 @@ content:
     type: file
     path: data/ateliers.json
     format: json
-    list:
-      collapsible: true
-      collapsed: true
-      summary: "{date} · {titre} · {lieu}"
+    list: true
     fields:
       - name: titre
         label: Titre de l'atelier
@@ -105,10 +102,7 @@ content:
     type: file
     path: data/oeuvres.json
     format: json
-    list:
-      collapsible: true
-      collapsed: true
-      summary: "{titre}"
+    list: true
     fields:
       - name: titre
         label: Titre de l'œuvre
@@ -147,10 +141,7 @@ content:
     type: file
     path: data/photos.json
     format: json
-    list:
-      collapsible: true
-      collapsed: true
-      summary: "{legende}"
+    list: true
     fields:
       - name: image
         label: Photo
