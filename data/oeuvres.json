@@ -1,0 +1,50 @@
+[
+  {
+    "titre": "Envol",
+    "annee": "2026",
+    "technique": "Acrylique sur toile",
+    "dimensions": "Dimensions à préciser",
+    "image": "images/oeuvres/oeuvre-1.svg",
+    "disponible": true
+  },
+  {
+    "titre": "Coulée",
+    "annee": "2026",
+    "technique": "Peinture coulée (pouring)",
+    "dimensions": "Dimensions à préciser",
+    "image": "images/oeuvres/oeuvre-2.svg",
+    "disponible": true
+  },
+  {
+    "titre": "Cœurs en feu",
+    "annee": "2026",
+    "technique": "Acrylique sur toile",
+    "dimensions": "Dimensions à préciser",
+    "image": "images/oeuvres/oeuvre-3.svg",
+    "disponible": false
+  },
+  {
+    "titre": "Manga",
+    "annee": "2026",
+    "technique": "Encre et acrylique",
+    "dimensions": "Dimensions à préciser",
+    "image": "images/oeuvres/oeuvre-4.svg",
+    "disponible": true
+  },
+  {
+    "titre": "Imagination",
+    "annee": "2026",
+    "technique": "Acrylique sur toile",
+    "dimensions": "Dimensions à préciser",
+    "image": "images/oeuvres/oeuvre-5.svg",
+    "disponible": true
+  },
+  {
+    "titre": "Nuit violette",
+    "annee": "2026",
+    "technique": "Acrylique sur toile",
+    "dimensions": "Dimensions à préciser",
+    "image": "images/oeuvres/oeuvre-6.svg",
+    "disponible": false
+  }
+]

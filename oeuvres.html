@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DALLAF · Les œuvres de Soukaina Lafdal</title>
+<meta name="description" content="Galerie des peintures originales de Soukaina Lafdal (DALLAF), artiste peintre à Lyon.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=16">
+</head>
+<body class="u-galerie">
+<nav class="uni-bar" aria-label="Univers">
+  <a class="uni uni-dallaf" href="oeuvres.html" aria-current="page"><span class="uni-name">DALLAF</span><span class="uni-sub">Les œuvres</span></a>
+  <a class="uni uni-tila" href="ateliers.html"><span class="uni-name">Tila Art Club</span><span class="uni-sub">Les ateliers</span></a>
+</nav>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="index.html">Dallaf</a>
+    <nav class="nav">
+      <a href="#gallery">Galerie</a>
+      <a href="#apropos">La fondatrice</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="wrap g-hero reveal">
+    <h1>Peindre l'imagination, l'amour, la vie</h1>
+    <p>Œuvres originales de Soukaina Lafdal. Pièces uniques, peintes à la main. Sélectionnez une œuvre pour la découvrir en détail.</p>
+  </section>
+
+  <section class="wrap">
+    <div class="filters">
+      <button data-f="toutes" aria-pressed="true">Toutes</button>
+      <button data-f="dispo" aria-pressed="false">Disponibles</button>
+    </div>
+    <div class="gallery" id="gallery"></div>
+  </section>
+
+  <section class="founder" id="apropos">
+    <div class="wrap">
+      <p class="f-kicker reveal">La fondatrice</p>
+      <div class="f-grid">
+        <figure class="f-portrait reveal">
+          <img src="images/fondatrice/portrait.svg" alt="Portrait de Soukaina Lafdal">
+          <figcaption>Soukaina Lafdal</figcaption>
+        </figure>
+        <div class="f-text reveal">
+          <h2>Soukaina Lafdal</h2>
+          <blockquote>« Peindre l'imagination, l'amour, la vie. »</blockquote>
+          <p>Artiste peintre installée à Lyon, Soukaina signe ses toiles sous le nom <strong>DALLAF</strong>. Couleurs franches, contrastes forts, cœurs, oiseaux et matières qui coulent : chaque œuvre raconte une émotion.</p>
+          <p>Nourrie par le manga, les musées et tout ce qui la fait vibrer, elle passe de l'acrylique à la peinture coulée et aime laisser la toile la surprendre.</p>
+          <p>Elle a aussi créé <a href="ateliers.html">Tila Art Club</a> pour partager sa passion : des ateliers d'art dans les cafés lyonnais, ouverts à toutes et à tous.</p>
+          <ul class="f-facts">
+            <li><b>Basée à</b>Lyon</li>
+            <li><b>Techniques</b>Acrylique, pouring, encre</li>
+            <li><b>Inspirations</b>Manga, amour, imaginaire</li>
+          </ul>
+        </div>
+      </div>
+      <div class="f-collage">
+        <figure class="reveal"><img src="images/fondatrice/atelier.svg" alt="Soukaina en train de peindre" loading="lazy"><figcaption>À l'atelier</figcaption></figure>
+        <figure class="reveal"><img src="images/fondatrice/musee.svg" alt="Soukaina au musée" loading="lazy"><figcaption>Au musée</figcaption></figure>
+        <figure class="reveal"><img src="images/fondatrice/detail.svg" alt="Détail d'une toile" loading="lazy"><figcaption>Dans les détails</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact contact-pro" id="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <p class="f-kicker">Contact</p>
+        <h2>Prendre contact</h2>
+        <p>Pour toute demande d'acquisition, de commande sur mesure, d'exposition ou de collaboration, nous vous invitons à remplir ce formulaire. Une réponse vous sera apportée sous 48 heures.</p>
+        <p class="contact-note">Les prix des œuvres sont communiqués sur demande. Livraison et remise en main propre possibles à Lyon.</p>
+        <div class="links">
+          <a href="mailto:A_REMPLACER@gmail.com">A_REMPLACER@gmail.com</a>
+          <a href="https://www.instagram.com/dallaf1/" target="_blank" rel="noopener">Instagram · @dallaf1 ↗</a>
+        </div>
+      </div>
+      <form id="contact-form" class="reveal" data-ton="vous">
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+        <div class="form-row">
+          <label>Prénom<input name="prenom" required autocomplete="given-name"></label>
+          <label>Nom<input name="nom" required autocomplete="family-name"></label>
+        </div>
+        <div class="form-row">
+          <label>Adresse e-mail<input name="email" type="email" required autocomplete="email"></label>
+          <label>Téléphone<input name="telephone" type="tel" autocomplete="tel" placeholder="Facultatif"></label>
+        </div>
+        <label>Objet de votre demande
+          <select name="sujet" id="sujet">
+            <option value="acquisition" selected>Acquisition d'une œuvre</option>
+            <option value="commande">Commande sur mesure</option>
+            <option value="exposition">Exposition / collaboration</option>
+            <option value="presse">Presse</option>
+            <option value="autre">Autre demande</option>
+          </select>
+        </label>
+        <label>Votre message<textarea name="message" id="message" required></textarea></label>
+        <button class="btn" type="submit">Envoyer la demande</button>
+        <p class="form-msg" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lb-close" aria-label="Fermer">×</button>
+  <div class="lb-inner">
+    <img src="" alt="">
+    <div>
+      <h2></h2>
+      <p class="lb-tech"></p>
+      <p class="lb-dim"></p>
+      <p class="lb-price">Prix sur demande</p>
+      <a class="btn" href="#contact"></a>
+    </div>
+  </div>
+</div>
+
+<footer class="foot"><div class="wrap"><span>© DALLAF · Soukaina Lafdal</span><a href="ateliers.html">Les ateliers Tila Art Club →</a></div></footer>
+<script src="js/main.js?v=16"></script>
+</body>
+</html>
