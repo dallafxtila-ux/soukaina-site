@@ -255,10 +255,13 @@ async function initAteliers() {
       if (!lieux.has(n) || (!lieux.get(n) && a.lien_lieu)) lieux.set(n, safeUrl(a.lien_lieu));
     });
     const noms = [...lieux.keys()];
-    cafes.innerHTML = noms.map((n) => {
+    const pills = (hidden) => noms.map((n) => {
       const url = lieux.get(n);
-      return url ? `<a href="${esc(url)}" target="_blank" rel="noopener">${esc(n)} <i>↗</i></a>` : `<span>${esc(n)}</span>`;
+      const h = hidden ? ' aria-hidden="true" tabindex="-1"' : "";
+      return url ? `<a href="${esc(url)}" target="_blank" rel="noopener"${h}>${esc(n)} <i>↗</i></a>` : `<span${hidden ? ' aria-hidden="true"' : ""}>${esc(n)}</span>`;
     }).join("");
+    // La 2e copie sert au défilement en boucle sur téléphone (cachée sur ordinateur)
+    cafes.innerHTML = `<div class="cafes-track">${pills(false)}<div class="cafes-dup" aria-hidden="true">${pills(true)}</div></div>`;
     document.getElementById("cafes-bloc").hidden = !noms.length;
   }
   reveal();
@@ -419,12 +422,45 @@ function initContact() {
   const form = document.getElementById("contact-form");
   if (!form) return;
   const msg = form.querySelector(".form-msg");
+  const vous = form.dataset.ton === "vous";
+
+  // Écran de confirmation qui remplace le formulaire après l'envoi
+  const done = document.createElement("div");
+  done.className = "form-done";
+  done.hidden = true;
+  done.setAttribute("role", "status");
+  done.setAttribute("tabindex", "-1");
+  form.after(done);
+
+  const showDone = (prenom) => {
+    const nom = prenom ? esc(prenom.trim().split(/\s+/)[0]) : "";
+    done.innerHTML = vous
+      ? `<div class="fd-check" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></div>
+         <h3>Merci${nom ? " " + nom : ""}, votre demande est bien envoyée.</h3>
+         <p>Soukaina vous répondra personnellement sous 48 heures, à l'adresse e-mail que vous avez indiquée.</p>
+         <button type="button" class="btn fd-again">Envoyer une autre demande</button>`
+      : `<div class="fd-check" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></div>
+         <h3 class="tila">Merci${nom ? " " + nom : ""} ! 🧡</h3>
+         <p>Ton message est bien arrivé. Je te réponds très vite par e-mail.</p>
+         <p class="fd-small">En attendant, viens voir les coulisses sur <a href="https://www.instagram.com/tila.art.club/" target="_blank" rel="noopener">@tila.art.club</a></p>
+         <button type="button" class="btn btn-main fd-again">Envoyer un autre message</button>`;
+    form.hidden = true;
+    done.hidden = false;
+    done.querySelector(".fd-again").addEventListener("click", () => {
+      done.hidden = true;
+      form.hidden = false;
+      form.querySelector("input:not([type=hidden]):not(.hp)")?.focus();
+    });
+    done.scrollIntoView({ behavior: "smooth", block: "center" });
+    done.focus({ preventScroll: true });
+  };
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (form.botcheck.checked) return;
-    const btn = form.querySelector("button");
-    const vous = form.dataset.ton === "vous";
-    btn.disabled = true; msg.textContent = "Envoi en cours…";
+    const btn = form.querySelector("button[type=submit]");
+    const label = btn.textContent;
+    btn.disabled = true; btn.textContent = "Envoi en cours…"; msg.textContent = "";
     const data = Object.fromEntries(new FormData(form));
     data.access_key = WEB3FORMS_KEY;
     data.subject = (vous ? "DALLAF · " : "Tila Art Club · ") + "Nouvelle demande : " + (data.sujet || "contact");
@@ -436,15 +472,13 @@ function initContact() {
       const j = await r.json();
       if (!j.success) throw new Error(j.message);
       form.reset();
-      msg.textContent = vous
-        ? "Merci, votre demande a bien été envoyée. Nous vous répondrons sous 48 heures."
-        : "Merci ! Ton message est bien parti, je te réponds très vite.";
+      showDone(data.prenom);
     } catch {
       msg.textContent = vous
-        ? "L'envoi n'a pas pu aboutir. Vous pouvez nous écrire directement par e-mail."
-        : "Oups, l'envoi n'a pas marché. Tu peux m'écrire directement par e-mail ou Instagram.";
+        ? "L'envoi n'a pas pu aboutir. Vous pouvez écrire directement à contact@dallaf.com."
+        : "Oups, l'envoi n'a pas marché. Tu peux m'écrire directement à contact@dallaf.com ou sur Instagram.";
     }
-    btn.disabled = false;
+    btn.disabled = false; btn.textContent = label;
   });
 }
 

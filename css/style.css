@@ -669,3 +669,61 @@ section[id] { scroll-margin-top: calc(var(--bar-h) + 80px); }
 .g-hero { text-align: center; }
 .g-hero p { margin-left: auto; margin-right: auto; }
 @media (max-width: 560px) { .g-hero h1 { font-size: 9.4vw; line-height: 1.08; } }
+
+/* Pied de page : © à gauche, logo Grande Famille plus grand à droite, une seule ligne partout */
+.foot .wrap { flex-direction: row !important; flex-wrap: nowrap; justify-content: space-between; align-items: center; text-align: left !important; gap: 16px; }
+.foot .gf-credit { opacity: .9; }
+.foot .gf-credit img { height: 24px; }
+@media (max-width: 560px) { .foot .gf-credit img { height: 20px; } }
+
+/* =========================================================
+   CONFIRMATION D'ENVOI DU FORMULAIRE
+   ========================================================= */
+.form-done { text-align: center; padding: clamp(32px, 6vw, 56px) clamp(20px, 4vw, 40px); outline: none; animation: fdIn .5s cubic-bezier(.2,.7,.2,1); }
+.form-done[hidden] { display: none; }
+.form-done h3 { margin: 18px 0 10px; font-size: clamp(24px, 3.2vw, 32px); line-height: 1.15; }
+.form-done p { margin: 0 auto 10px; max-width: 42ch; }
+.form-done .fd-small { font-size: 14px; }
+.form-done .btn { margin-top: 18px; }
+.fd-check { width: 76px; height: 76px; margin: 0 auto; }
+.fd-check svg { width: 100%; height: 100%; fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.fd-check circle { stroke-dasharray: 151; stroke-dashoffset: 151; animation: fdDraw .7s .1s ease-out forwards; }
+.fd-check path { stroke-dasharray: 40; stroke-dashoffset: 40; animation: fdDraw .4s .7s ease-out forwards; }
+@keyframes fdDraw { to { stroke-dashoffset: 0; } }
+@keyframes fdIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* DALLAF : sobre, façon galerie */
+.u-galerie .form-done { border: 1px solid var(--g-line); background: var(--g-card); }
+.u-galerie .fd-check svg { stroke: var(--dallaf-pink); }
+.u-galerie .form-done h3 { font-family: var(--serif); font-weight: 400; color: var(--g-ink); }
+.u-galerie .form-done p { color: var(--g-muted); }
+.u-galerie .form-done .btn { background: var(--g-btn); color: var(--g-btn-ink); border-radius: 0; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; padding: 15px 28px; }
+
+/* Tila : joyeux */
+.u-atelier .form-done { background: var(--t-card); border: 3px solid var(--t-ink); border-radius: 28px; box-shadow: 8px 8px 0 var(--t-orange); }
+.u-atelier .fd-check svg { stroke: var(--t-orange); }
+.u-atelier .form-done h3 { color: var(--t-ink); }
+.u-atelier .form-done p { color: var(--t-muted); }
+.u-atelier .form-done a { color: var(--t-orange-dark); }
+
+@media (prefers-reduced-motion: reduce) {
+  .form-done, .fd-check circle, .fd-check path { animation: none; stroke-dashoffset: 0; }
+}
+
+/* Cafés : en grille sur ordinateur, bandeau qui défile sur téléphone */
+.cafes { display: block; }
+.cafes-track { display: flex; flex-wrap: wrap; gap: 12px; }
+.cafes-dup { display: contents; }
+.cafes-dup > * { display: none; }
+@media (max-width: 760px) {
+  .cafes { overflow: hidden; margin: 0 -16px; padding: 6px 0 10px;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .cafes-track { flex-wrap: nowrap; width: max-content; gap: 10px; animation: cafesSlide 28s linear infinite; }
+  .cafes-dup > * { display: inline-block; }
+  .cafes-track a, .cafes-track span { white-space: nowrap; flex: none; margin-right: 0; font-size: 16px; padding: 9px 16px; }
+  .cafes-dup { display: flex; gap: 10px; }
+  .cafes:hover .cafes-track, .cafes:active .cafes-track { animation-play-state: paused; }
+}
+@keyframes cafesSlide { to { transform: translateX(calc(-50% - 5px)); } }
+@media (prefers-reduced-motion: reduce) { .cafes-track { animation: none; } .cafes { overflow-x: auto; } }
