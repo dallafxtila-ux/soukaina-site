@@ -8,7 +8,7 @@
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: "DM Sans", system-ui, -apple-system, sans-serif;
   --tila: "Fraunces", "Cooper Black", Georgia, serif;
-  --dallaf-pink: #e8326f;
+  --dallaf-pink: #f07a28; /* accent DALLAF = orange Tila */
   --dallaf-violet: #9b7fd1;
 
   /* Œuvres, style A « Galerie » (par défaut) */
@@ -30,7 +30,7 @@
   --t-orange-dark: #c9541a;
   --t-cream: #fff3e0;
   --t-sky: #9ccbf2;
-  --t-pink: #f6a6b8;
+  --t-pink: #f7b27a; /* ex-rose, passé en orange clair */
   --t-yellow: #f9d65c;
   --t-green: #7fb77e;
 }
@@ -619,4 +619,48 @@ section[id] { scroll-margin-top: calc(var(--bar-h) + 80px); }
   .foot .wrap { flex-direction: column; text-align: center; gap: 14px; }
   .gf-credit img { height: 13px; }
   .gf-modal-logo { max-height: 44px; }
+}
+
+/* Menu sur téléphone : logo au-dessus, menu centré en dessous, rien ne déborde */
+.nav-short { display: none; }
+@media (max-width: 640px) {
+  .top .wrap { flex-direction: column; justify-content: center; gap: 2px; min-height: 0; padding: 10px 0 6px; }
+  .logo { font-size: 20px; }
+  .u-atelier .logo { font-size: 20px; }
+  .nav { width: 100%; justify-content: center; flex-wrap: nowrap; gap: 0; }
+  .nav a { padding: 6px 9px; font-size: 13px; white-space: nowrap; }
+  .nav-long { display: none; }
+  .nav-short { display: inline; }
+  section[id] { scroll-margin-top: calc(var(--bar-h) + 100px); }
+}
+.b-pause b, .b-pause u { color: var(--t-orange-dark); }
+
+/* Privatisation sur téléphone : une seule colonne, compacte, tient dans un écran */
+@media (max-width: 760px) {
+  .privat { grid-template-columns: 1fr; gap: 18px; padding: 26px 20px; border-radius: 26px; }
+  .privat > div { display: contents; }
+  .privat .t-title { order: 1; font-size: clamp(30px, 9vw, 38px); line-height: 1.02; margin: 0; }
+  .privat p { order: 2; font-size: 15px; line-height: 1.5; margin: 0; }
+  .privat ul { order: 3; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; }
+  .privat li { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; font-size: 15px; line-height: 1.1; white-space: nowrap; }
+  .privat li span { display: inline; font-size: 17px; margin: 0; }
+  .privat-photo { order: 4; transform: none; max-width: none; border-width: 2px; border-radius: 18px; box-shadow: 5px 5px 0 var(--t-orange); }
+  .privat-photo img { aspect-ratio: 16/9; object-position: 50% 45%; }
+  .privat-photo figcaption { left: 10px; bottom: 10px; padding: 5px 12px; font-size: 13px; border-radius: 999px; }
+  .privat .btn-main { order: 5; justify-self: start; }
+}
+@media (max-width: 760px) { .privat li span { margin-right: 4px; } }
+
+/* Ce que t'apportent les ateliers : liste numérotée simple */
+.benefits { list-style: none; margin: 0; padding: 0; max-width: 860px; }
+.benefits li { display: grid; grid-template-columns: 76px 1fr; gap: 18px; padding: 26px 0; border-bottom: 2px solid var(--t-ink); align-items: baseline; }
+.benefits li:first-child { border-top: 2px solid var(--t-ink); }
+.benefits .n { font-family: var(--tila); font-weight: 900; font-variation-settings: "SOFT" 100; font-size: 46px; line-height: 1; color: var(--t-orange); }
+.benefits h3 { margin: 0 0 4px; font-size: 27px; line-height: 1.15; }
+.benefits p { margin: 0; color: var(--t-muted); font-size: 16px; }
+@media (max-width: 560px) {
+  .benefits li { grid-template-columns: 50px 1fr; gap: 12px; padding: 18px 0; }
+  .benefits .n { font-size: 34px; }
+  .benefits h3 { font-size: 21px; }
+  .benefits p { font-size: 15px; }
 }
