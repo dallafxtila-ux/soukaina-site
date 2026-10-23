@@ -1,0 +1,38 @@
+[
+  {
+    "titre": "Soleil",
+    "annee": "",
+    "technique": "Peinture sur toile",
+    "dimensions": "",
+    "image": "images/galerie/dallaf-14.jpg",
+    "disponible": true,
+    "miniature": "images/galerie/mini/dallaf-14.jpg"
+  },
+  {
+    "titre": "L'Œil",
+    "annee": "",
+    "technique": "Peinture sur toile",
+    "dimensions": "",
+    "image": "images/galerie/dallaf-19.jpg",
+    "disponible": true,
+    "miniature": "images/galerie/mini/dallaf-19.jpg"
+  },
+  {
+    "titre": "Les Mains",
+    "annee": "",
+    "technique": "Peinture sur toile",
+    "dimensions": "",
+    "image": "images/galerie/dallaf-28.jpg",
+    "disponible": true,
+    "miniature": "images/galerie/mini/dallaf-28.jpg"
+  },
+  {
+    "titre": "Abstraction rouge et or",
+    "annee": "",
+    "technique": "Peinture sur toile",
+    "dimensions": "",
+    "image": "images/galerie/dallaf-25.jpg",
+    "disponible": true,
+    "miniature": "images/galerie/mini/dallaf-25.jpg"
+  }
+]
