@@ -668,3 +668,4 @@ section[id] { scroll-margin-top: calc(var(--bar-h) + 80px); }
 /* DALLAF : titre et intro centrés */
 .g-hero { text-align: center; }
 .g-hero p { margin-left: auto; margin-right: auto; }
+@media (max-width: 560px) { .g-hero h1 { font-size: 9.4vw; line-height: 1.08; } }
