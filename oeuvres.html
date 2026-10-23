@@ -6,8 +6,8 @@
 <title>DALLAF · Les œuvres de Soukaina Lafdal</title>
 <meta name="description" content="Galerie des peintures originales de Soukaina Lafdal (DALLAF), artiste peintre à Lyon.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,600..900,0..100,0..1&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=16">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=25">
 </head>
 <body class="u-galerie">
 <nav class="uni-bar" aria-label="Univers">
@@ -18,7 +18,8 @@
   <div class="wrap">
     <a class="logo" href="index.html">Dallaf</a>
     <nav class="nav">
-      <a href="#gallery">Galerie</a>
+      <a href="#oeuvres" data-tab="oeuvres">Œuvres</a>
+      <a href="#galerie-photo" data-tab="photos">Galerie photo</a>
       <a href="#apropos">La fondatrice</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -31,12 +32,24 @@
     <p>Œuvres originales de Soukaina Lafdal. Pièces uniques, peintes à la main. Sélectionnez une œuvre pour la découvrir en détail.</p>
   </section>
 
-  <section class="wrap">
-    <div class="filters">
-      <button data-f="toutes" aria-pressed="true">Toutes</button>
-      <button data-f="dispo" aria-pressed="false">Disponibles</button>
+  <section class="wrap" id="collections">
+    <div class="g-tabs" role="tablist" aria-label="Collections">
+      <button role="tab" id="tab-oeuvres" aria-controls="panel-oeuvres" aria-selected="true">Ses œuvres</button>
+      <button role="tab" id="tab-photos" aria-controls="panel-photos" aria-selected="false" tabindex="-1">Sa galerie photo</button>
     </div>
-    <div class="gallery" id="gallery"></div>
+
+    <div class="g-panel" id="panel-oeuvres" role="tabpanel" aria-labelledby="tab-oeuvres">
+      <div class="filters">
+        <button data-f="toutes" aria-pressed="true">Toutes</button>
+        <button data-f="dispo" aria-pressed="false">Disponibles</button>
+      </div>
+      <div class="gallery" id="gallery"></div>
+    </div>
+
+    <div class="g-panel" id="panel-photos" role="tabpanel" aria-labelledby="tab-photos" hidden>
+      <p class="g-panel-intro">Expositions, coulisses de l'atelier et moments de création.</p>
+      <div class="photo-wall" id="photo-wall"></div>
+    </div>
   </section>
 
   <section class="founder" id="apropos">
@@ -44,7 +57,7 @@
       <p class="f-kicker reveal">La fondatrice</p>
       <div class="f-grid">
         <figure class="f-portrait reveal">
-          <img src="images/fondatrice/portrait.svg" alt="Portrait de Soukaina Lafdal">
+          <img src="images/galerie/dallaf-04.jpg" alt="Portrait de Soukaina Lafdal, artiste peintre DALLAF">
           <figcaption>Soukaina Lafdal</figcaption>
         </figure>
         <div class="f-text reveal">
@@ -60,10 +73,16 @@
           </ul>
         </div>
       </div>
+      <figure class="f-quote reveal">
+        <blockquote>
+          <p>« Je suis née à l'Hôtel-Dieu de Lyon. Y exposer mes premières toiles, c'était revenir là où tout a commencé&nbsp;: offrir mes premières œuvres au lieu qui m'a vue naître. »</p>
+        </blockquote>
+        <figcaption>Soukaina Lafdal, <span>fondatrice de DALLAF</span></figcaption>
+      </figure>
       <div class="f-collage">
-        <figure class="reveal"><img src="images/fondatrice/atelier.svg" alt="Soukaina en train de peindre" loading="lazy"><figcaption>À l'atelier</figcaption></figure>
-        <figure class="reveal"><img src="images/fondatrice/musee.svg" alt="Soukaina au musée" loading="lazy"><figcaption>Au musée</figcaption></figure>
-        <figure class="reveal"><img src="images/fondatrice/detail.svg" alt="Détail d'une toile" loading="lazy"><figcaption>Dans les détails</figcaption></figure>
+        <figure class="reveal"><img src="images/galerie/mini/dallaf-07.jpg" alt="Soukaina Lafdal avec sa toile « Les Mains »" loading="lazy"><figcaption>Avec « Les Mains »</figcaption></figure>
+        <figure class="reveal"><img src="images/galerie/mini/dallaf-01.jpg" alt="Soukaina Lafdal entourée de ses premières toiles au Grand Hôtel-Dieu de Lyon" loading="lazy"><figcaption>Ses premières toiles, au Grand Hôtel-Dieu</figcaption></figure>
+        <figure class="reveal"><img src="images/galerie/mini/dallaf-29.jpg" alt="Détail de la toile « Les Mains »" loading="lazy"><figcaption>Dans les détails</figcaption></figure>
       </div>
     </div>
   </section>
@@ -121,7 +140,25 @@
   </div>
 </div>
 
-<footer class="foot"><div class="wrap"><span>© DALLAF · Soukaina Lafdal</span><a href="ateliers.html">Les ateliers Tila Art Club →</a></div></footer>
-<script src="js/main.js?v=16"></script>
+<div class="lightbox photo-view" id="photo-view" role="dialog" aria-modal="true" aria-label="Photo">
+  <button class="lb-close" aria-label="Fermer">×</button>
+  <button class="lb-nav lb-prev" aria-label="Photo précédente">‹</button>
+  <figure><img src="" alt=""><figcaption></figcaption></figure>
+  <button class="lb-nav lb-next" aria-label="Photo suivante">›</button>
+</div>
+
+<footer class="foot"><div class="wrap"><span>© DALLAF · Soukaina Lafdal</span><a href="ateliers.html">Les ateliers Tila Art Club →</a><button type="button" class="gf-credit" data-gf-open aria-label="Site réalisé par Grande Famille">
+    <span>Site réalisé par</span><img src="https://cdn.shopify.com/s/files/1/0729/3983/1631/files/logos_Plan_de_travail_1.png?v=1789351463&amp;width=600" alt="Grande Famille" loading="lazy" decoding="async">
+  </button></div></footer>
+
+<div class="gf-modal" id="gf-modal" role="dialog" aria-modal="true" aria-label="Grande Famille" hidden>
+  <div class="gf-modal-content">
+    <button type="button" class="gf-modal-close" data-gf-close aria-label="Fermer">&times;</button>
+    <img src="https://cdn.shopify.com/s/files/1/0729/3983/1631/files/logos_Plan_de_travail_1.png?v=1789351463&amp;width=600" alt="Logo Grande Famille" loading="lazy" decoding="async" class="gf-modal-logo">
+    <p class="gf-modal-text">Ce site a été conçu en collaboration avec <strong>Grande Famille</strong>, l’agence qui accompagne les marques dans la création et le développement de toute leur entreprise.</p>
+    <a href="mailto:oriana@grandefamillegroup.com" class="gf-contact-link">Nous contacter</a>
+  </div>
+</div>
+<script src="js/main.js?v=25"></script>
 </body>
 </html>

@@ -1,50 +1,38 @@
 [
   {
-    "titre": "Envol",
-    "annee": "2026",
-    "technique": "Acrylique sur toile",
-    "dimensions": "Dimensions à préciser",
-    "image": "images/oeuvres/oeuvre-1.svg",
-    "disponible": true
+    "titre": "Soleil",
+    "annee": "",
+    "technique": "Peinture sur toile",
+    "dimensions": "",
+    "image": "images/galerie/dallaf-14.jpg",
+    "disponible": true,
+    "miniature": "images/galerie/mini/dallaf-14.jpg"
   },
   {
-    "titre": "Coulée",
-    "annee": "2026",
-    "technique": "Peinture coulée (pouring)",
-    "dimensions": "Dimensions à préciser",
-    "image": "images/oeuvres/oeuvre-2.svg",
-    "disponible": true
+    "titre": "L'Œil",
+    "annee": "",
+    "technique": "Peinture sur toile",
+    "dimensions": "",
+    "image": "images/galerie/dallaf-19.jpg",
+    "disponible": true,
+    "miniature": "images/galerie/mini/dallaf-19.jpg"
   },
   {
-    "titre": "Cœurs en feu",
-    "annee": "2026",
-    "technique": "Acrylique sur toile",
-    "dimensions": "Dimensions à préciser",
-    "image": "images/oeuvres/oeuvre-3.svg",
-    "disponible": false
+    "titre": "Les Mains",
+    "annee": "",
+    "technique": "Peinture sur toile",
+    "dimensions": "",
+    "image": "images/galerie/dallaf-28.jpg",
+    "disponible": true,
+    "miniature": "images/galerie/mini/dallaf-28.jpg"
   },
   {
-    "titre": "Manga",
-    "annee": "2026",
-    "technique": "Encre et acrylique",
-    "dimensions": "Dimensions à préciser",
-    "image": "images/oeuvres/oeuvre-4.svg",
-    "disponible": true
-  },
-  {
-    "titre": "Imagination",
-    "annee": "2026",
-    "technique": "Acrylique sur toile",
-    "dimensions": "Dimensions à préciser",
-    "image": "images/oeuvres/oeuvre-5.svg",
-    "disponible": true
-  },
-  {
-    "titre": "Nuit violette",
-    "annee": "2026",
-    "technique": "Acrylique sur toile",
-    "dimensions": "Dimensions à préciser",
-    "image": "images/oeuvres/oeuvre-6.svg",
-    "disponible": false
+    "titre": "Abstraction rouge et or",
+    "annee": "",
+    "technique": "Peinture sur toile",
+    "dimensions": "",
+    "image": "images/galerie/dallaf-25.jpg",
+    "disponible": true,
+    "miniature": "images/galerie/mini/dallaf-25.jpg"
   }
 ]

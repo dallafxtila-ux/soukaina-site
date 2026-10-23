@@ -38,10 +38,10 @@ async function initGalerie() {
     const list = oeuvres.filter((o) => filtre === "toutes" || (filtre === "dispo" && o.disponible));
     grid.innerHTML = list.map((o) => `
       <figure class="piece reveal" data-i="${oeuvres.indexOf(o)}" tabindex="0" role="button" aria-label="Découvrir ${esc(o.titre)}">
-        <div class="frame"><img src="${esc(o.image)}" alt="${esc(o.titre)}" loading="lazy"></div>
+        <div class="frame"><img src="${esc(o.miniature || o.image)}" alt="${esc(o.titre)}, œuvre de Soukaina Lafdal (DALLAF)" loading="lazy"></div>
         <figcaption>
           <h3>${esc(o.titre)}</h3>
-          <p class="meta">${esc(o.technique)} · ${esc(o.dimensions)} · ${esc(o.annee)}</p>
+          <p class="meta">${[o.technique, o.dimensions, o.annee].filter(Boolean).map(esc).join(" · ")}</p>
           <span class="tag ${o.disponible ? "dispo" : ""}">${o.disponible ? "Disponible" : "Vendue"}</span>
         </figcaption>
       </figure>`).join("");
@@ -62,7 +62,7 @@ async function initGalerie() {
     lb.querySelector("img").src = o.image;
     lb.querySelector("img").alt = o.titre;
     lb.querySelector("h2").textContent = o.titre;
-    lb.querySelector(".lb-tech").textContent = `${o.technique} · ${o.annee}`;
+    lb.querySelector(".lb-tech").textContent = [o.technique, o.annee].filter(Boolean).join(" · ");
     lb.querySelector(".lb-dim").textContent = o.dimensions;
     const btn = lb.querySelector(".btn");
     lb.querySelector(".lb-price").textContent = o.disponible ? "Œuvre disponible · Prix sur demande" : "Œuvre vendue · Collection privée";
@@ -73,7 +73,7 @@ async function initGalerie() {
       const msg = document.getElementById("message");
       if (sujet) sujet.value = o.disponible ? "acquisition" : "commande";
       if (msg) msg.value = o.disponible
-        ? `Bonjour,\n\nJe souhaiterais obtenir des informations sur l'œuvre « ${o.titre} » (${o.technique}, ${o.dimensions}).\n\nBien cordialement,`
+        ? `Bonjour,\n\nJe souhaiterais obtenir des informations sur l'œuvre « ${o.titre} » (${[o.technique, o.dimensions].filter(Boolean).join(", ")}).\n\nBien cordialement,`
         : `Bonjour,\n\nL'œuvre « ${o.titre} » m'a beaucoup plu. Serait-il possible d'envisager une commande dans le même esprit ?\n\nBien cordialement,`;
     };
     lb.classList.add("open");
@@ -87,6 +87,78 @@ async function initGalerie() {
   grid.addEventListener("keydown", (e) => { const p = e.target.closest(".piece"); if (p && e.key === "Enter") open(oeuvres[p.dataset.i]); });
 
   render();
+}
+
+/* =========================================================
+   DALLAF : ONGLETS « SES ŒUVRES » / « SA GALERIE PHOTO »
+   ========================================================= */
+function initTabs() {
+  const tabs = [...document.querySelectorAll(".g-tabs [role=tab]")];
+  if (!tabs.length) return;
+  const select = (tab, focus) => {
+    tabs.forEach((t) => {
+      const on = t === tab;
+      t.setAttribute("aria-selected", on);
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) tab.focus();
+    reveal();
+  };
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => select(t));
+    t.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") select(tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length], true);
+    });
+  });
+  // Liens du menu (#oeuvres / #galerie-photo) : ouvrent le bon onglet
+  const fromHash = () => {
+    const want = location.hash === "#galerie-photo" ? "tab-photos" : location.hash === "#oeuvres" ? "tab-oeuvres" : null;
+    if (!want) return;
+    select(document.getElementById(want));
+    document.getElementById("collections").scrollIntoView({ behavior: "smooth" });
+  };
+  addEventListener("hashchange", fromHash);
+  fromHash();
+}
+
+async function initPhotoWall() {
+  const wall = document.getElementById("photo-wall");
+  if (!wall) return;
+  let photos = await loadJSON("data/photos.json");
+  if (!Array.isArray(photos)) photos = photos.photos || [];
+  photos = photos.filter((p) => p && p.image);
+  wall.innerHTML = photos.length
+    ? photos.map((p, i) => `
+      <figure class="wall-item reveal">
+        <button data-i="${i}" aria-label="Agrandir la photo${p.legende ? " : " + esc(p.legende) : ""}"><img src="${esc(p.miniature || p.image)}" alt="${esc(p.legende || "Soukaina Lafdal, artiste peintre DALLAF à Lyon")}" loading="lazy"></button>
+        ${p.legende ? `<figcaption>${esc(p.legende)}</figcaption>` : ""}
+      </figure>`).join("")
+    : `<p class="g-panel-intro">Les premières photos arrivent bientôt.</p>`;
+
+  const lb = document.getElementById("photo-view");
+  let cur = 0;
+  const show = (i) => {
+    cur = (i + photos.length) % photos.length;
+    lb.querySelector("img").src = photos[cur].image;
+    lb.querySelector("img").alt = photos[cur].legende || "";
+    lb.querySelector("figcaption").textContent = photos[cur].legende || "";
+    lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  };
+  const close = () => { lb.classList.remove("open"); document.body.style.overflow = ""; };
+  wall.addEventListener("click", (e) => { const b = e.target.closest("button[data-i]"); if (b) show(+b.dataset.i); });
+  lb.querySelector(".lb-close").addEventListener("click", close);
+  lb.querySelector(".lb-prev").addEventListener("click", () => show(cur - 1));
+  lb.querySelector(".lb-next").addEventListener("click", () => show(cur + 1));
+  lb.addEventListener("click", (e) => { if (e.target === lb) close(); });
+  document.addEventListener("keydown", (e) => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") close();
+    if (e.key === "ArrowLeft") show(cur - 1);
+    if (e.key === "ArrowRight") show(cur + 1);
+  });
+  reveal();
 }
 
 /* =========================================================
@@ -376,9 +448,26 @@ function initContact() {
   });
 }
 
+/* =========================================================
+   CRÉDIT GRANDE FAMILLE (pop-up en pied de page)
+   ========================================================= */
+function initCredit() {
+  const modal = document.getElementById("gf-modal");
+  if (!modal) return;
+  const open = () => { modal.hidden = false; };
+  const close = () => { modal.hidden = true; };
+  document.querySelectorAll("[data-gf-open]").forEach((b) => b.addEventListener("click", open));
+  modal.querySelector("[data-gf-close]").addEventListener("click", close);
+  modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !modal.hidden) close(); });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  initCredit();
   reveal();
   initGalerie().catch(console.error);
+  initTabs();
+  initPhotoWall().catch(console.error);
   initAteliers().catch(console.error);
   initRecap().catch(console.error);
   initBrush();
