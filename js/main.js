@@ -1,7 +1,7 @@
 /* Soukaina — scripts du site (galerie, ateliers, contact) */
 
 // ⚙️ Clé gratuite Web3Forms (https://web3forms.com) : les messages arrivent dans la boîte mail de Soukaina.
-const WEB3FORMS_KEY = "A_REMPLACER";
+const WEB3FORMS_KEY = "4c603d5f-6cc7-4739-8071-e57e084a214a";
 
 const esc = (s = "") =>
   String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
